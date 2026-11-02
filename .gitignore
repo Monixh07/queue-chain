@@ -1,0 +1,9 @@
+node_modules/
+**/node_modules/
+**/artifacts/
+**/cache/
+**/coverage/
+**/dist/
+backend/.env
+.env
+*.log

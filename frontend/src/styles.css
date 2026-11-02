@@ -1,0 +1,246 @@
+:root {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  color: #17283e;
+  background: #f5f7fa;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  --navy: #15335b;
+  --blue: #2463a5;
+  --muted: #78889a;
+  --line: #e8edf2;
+  --paper: #fff;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 360px; min-height: 100vh; }
+button, input, select { font: inherit; }
+button { cursor: pointer; }
+.app-shell { min-height: 100vh; display: flex; flex-direction: column; }
+.topbar { height: 76px; padding: 0 max(5vw, calc((100vw - 1300px)/2)); background: #fff; border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 30px; }
+.brand { display: flex; align-items: center; gap: 11px; border: 0; background: transparent; color: var(--navy); text-align: left; padding: 0; }
+.brand-mark { width: 39px; height: 39px; display: grid; place-items: center; border-radius: 12px; color: #fff; background: #1c4777; }
+.brand strong { display: block; font: 800 17px 'Segoe UI', sans-serif; letter-spacing: -.3px; }
+.brand small { display: block; color: #92a0ad; font-size: 10px; margin-top: 2px; }
+.main-nav { display: flex; gap: 7px; height: 100%; }
+.nav-item { display: flex; align-items: center; gap: 8px; padding: 0 15px; border: 0; border-bottom: 2px solid transparent; background: transparent; color: #758496; font-size: 13px; font-weight: 600; }
+.nav-item.active { color: var(--navy); border-bottom-color: #2b69a7; }
+.connection { display: flex; align-items: center; gap: 8px; color: #768597; font-size: 11px; white-space: nowrap; }
+.connection i, .live-pill i { width: 7px; height: 7px; background: #e3a73f; border-radius: 50%; display: inline-block; }
+.connection i.online, .live-pill i { background: #43b680; }
+main { flex: 1; width: min(1300px, 90vw); margin: 0 auto; padding: 54px 0 70px; }
+footer { min-height: 54px; padding: 0 max(5vw, calc((100vw - 1300px)/2)); display: flex; align-items: center; justify-content: space-between; gap: 20px; color: #8997a6; font-size: 11px; background: #fff; border-top: 1px solid var(--line); }
+footer span { display: inline-flex; align-items: center; gap: 7px; }
+.notice { position: fixed; z-index: 4; right: 24px; top: 90px; max-width: min(460px, calc(100vw - 32px)); padding: 14px 15px; display: flex; align-items: center; gap: 10px; border-radius: 9px; box-shadow: 0 10px 40px #18355324; background: #fff; font-size: 13px; }
+.notice.success { color: #16794f; border-left: 3px solid #35aa77; }
+.notice.error { color: #a63e39; border-left: 3px solid #df675f; }
+.notice button { margin-left: auto; padding: 2px; border: 0; color: inherit; background: none; }
+.booking-layout { max-width: 1100px; margin: 20px auto 0; display: grid; grid-template-columns: 1fr 470px; gap: 90px; align-items: center; }
+.booking-copy { padding: 15px 0 36px; }
+.eyebrow { color: #7890a8; font-size: 10px; font-weight: 700; letter-spacing: 1.35px; }
+.eyebrow-dot { width: 7px; height: 7px; margin-right: 7px; display: inline-block; border-radius: 50%; background: #43af7a; }
+h1, h2, p { margin-top: 0; }
+.booking-copy h1, .admin-heading h1, .display-heading h1, .auth-card h1 { margin: 24px 0 19px; color: #173456; font: 800 52px/1.14 'Segoe UI', sans-serif; letter-spacing: -2.7px; }
+.booking-copy h1 em { color: #3576b4; font-style: normal; }
+.lead { max-width: 445px; margin-bottom: 32px; color: #718197; font-size: 15px; line-height: 1.8; }
+.promise-row { display: flex; flex-direction: column; gap: 17px; }
+.promise-row > div { display: flex; align-items: center; gap: 12px; }
+.promise-icon { width: 38px; height: 38px; display: grid; place-items: center; color: #2f70ae; border: 1px solid #e4edf5; border-radius: 11px; background: #fff; }
+.promise-row b, .promise-row small { display: block; }
+.promise-row b { color: #344a61; font-size: 12px; }
+.promise-row small { margin-top: 3px; color: #93a0ad; font-size: 11px; }
+.queue-summary { max-width: 420px; margin-top: 36px; padding: 15px 18px; display: flex; align-items: center; gap: 13px; border: 1px solid #e8edf2; border-radius: 12px; background: #fff; }
+.summary-icon { width: 36px; height: 36px; display: grid; place-items: center; background: #eff5fb; color: #2b6aa5; border-radius: 10px; }
+.queue-summary b, .queue-summary span { display: block; }
+.queue-summary b { color: #263d55; font-size: 13px; }
+.queue-summary span { margin-top: 2px; color: #93a0ad; font-size: 10px; }
+.summary-divider { width: 1px; height: 30px; margin: 0 5px 0 auto; background: var(--line); }
+.form-card, .card, .verify-card, .auth-card { background: #fff; border: 1px solid #e8edf2; border-radius: 14px; box-shadow: 0 8px 34px #1c365408; }
+.form-card { padding: 29px 31px 23px; }
+.card-title-row { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 24px; }
+.card-title-row h2 { margin: 8px 0 0; color: #203b5a; font: 700 20px 'Segoe UI', sans-serif; letter-spacing: -.5px; }
+.step-badge { color: #3573ac; font-size: 12px; font-weight: 700; }
+.step-badge span { color: #aab5c0; font-weight: 500; }
+.booking-form { display: flex; flex-direction: column; gap: 15px; }
+.booking-form label { display: flex; flex-direction: column; gap: 7px; color: #485c71; font-size: 11px; font-weight: 700; }
+.optional { display: inline; margin-left: 5px; color: #a1acb8; font-size: 10px; font-weight: 500; }
+.booking-form input, .booking-form select, .verify-form input, .table-tools input, .table-tools select { width: 100%; min-height: 43px; padding: 0 12px; color: #31475e; border: 1px solid #e4e9ef; border-radius: 7px; background: #fff; outline: none; font-size: 12px; font-weight: 400; }
+.booking-form input::placeholder, .verify-form input::placeholder { color: #b0bbc5; }
+.booking-form input:focus, .booking-form select:focus, .verify-form input:focus { border-color: #6ea2d1; box-shadow: 0 0 0 3px #4e8cc31b; }
+.form-note { display: flex; align-items: center; gap: 7px; color: #8292a2; font-size: 10px; margin: 1px 0; }
+.form-note svg { color: #58a67e; }
+.primary-button, .secondary-button, .outline-button { min-height: 43px; display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 0 16px; border-radius: 7px; font-size: 12px; font-weight: 700; transition: background .15s, transform .15s; }
+.primary-button { color: #fff; border: 1px solid #1e4d7e; background: #1d4e80; }
+.primary-button:hover:not(:disabled) { background: #28679f; transform: translateY(-1px); }
+.primary-button:disabled, .secondary-button:disabled, .outline-button:disabled { opacity: .48; cursor: not-allowed; }
+.primary-button.full, .outline-button.full { width: 100%; }
+.secondary-button { color: #38536d; border: 1px solid #e1e8ef; background: #fff; }
+.secondary-button:hover:not(:disabled) { background: #f5f8fb; }
+.outline-button { color: #2b6398; border: 1px solid #d5e4f1; background: #f7fbff; }
+.mode-toggle { width: 100%; min-height: 38px; margin: -8px 0 18px; padding: 0 10px; display: flex; align-items: center; gap: 8px; border: 1px solid #e7edf3; border-radius: 7px; background: #fbfcfe; color: #758699; text-align: left; font-size: 11px; }
+.mode-toggle.selected { border-color: #a2c3e1; color: #275b8a; background: #f2f8fd; }
+.toggle-switch { width: 22px; height: 13px; background: #cbd4dd; border-radius: 20px; position: relative; }
+.toggle-switch::after { content: ''; position: absolute; width: 9px; height: 9px; top: 2px; left: 2px; border-radius: 50%; background: #fff; transition: left .15s; }
+.selected .toggle-switch { background: #3677b5; }
+.selected .toggle-switch::after { left: 11px; }
+.admin-chip { margin-left: auto; color: #8999a9; font-size: 10px; }
+.booking-success { display: flex; align-items: flex-start; gap: 10px; margin-top: 16px; padding: 12px; border: 1px solid #cceadb; border-radius: 8px; background: #f2fbf6; color: #267750; }
+.booking-success > span { width: 26px; height: 26px; display: grid; place-items: center; border-radius: 50%; background: #d8f2e4; }
+.booking-success b, .booking-success small { display: block; }
+.booking-success b { font-size: 11px; }
+.booking-success small { margin-top: 4px; color: #668f7a; font-size: 10px; line-height: 1.5; }
+.below-form { margin: 17px 0 0; color: #9aa6b2; text-align: center; font-size: 10px; }
+.display-page, .admin-page { max-width: 1160px; margin: 0 auto; }
+.display-heading, .admin-heading { display: flex; align-items: center; justify-content: space-between; margin-bottom: 25px; }
+.display-heading h1, .admin-heading h1 { margin: 7px 0 0; font-size: 34px; letter-spacing: -1.4px; }
+.live-pill { display: flex; align-items: center; gap: 7px; color: #398665; font-size: 10px; font-weight: 800; letter-spacing: 1px; }
+.display-meta { display: flex; align-items: flex-end; flex-direction: column; gap: 6px; }
+.display-date { color: #8190a0; font-size: 11px; }
+.display-main { display: grid; grid-template-columns: 1.65fr 1fr; gap: 18px; }
+.now-card { min-height: 340px; padding: 32px; display: flex; align-items: center; flex-direction: column; justify-content: center; color: #fff; border-radius: 14px; background: linear-gradient(140deg, #17385f, #224e7e); box-shadow: 0 12px 32px #1b436b25; }
+.now-label { display: flex; align-items: center; gap: 9px; color: #bcd4eb; font-size: 11px; font-weight: 700; letter-spacing: 2px; }
+.pulse { width: 8px; height: 8px; border-radius: 50%; background: #65d6a0; box-shadow: 0 0 0 5px #65d6a01e; }
+.huge-token { margin: 15px 0 7px; font: 800 clamp(100px, 16vw, 174px)/1 'Segoe UI', sans-serif; letter-spacing: -8px; }
+.counter-call { color: #d0dfec; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-align: center; }
+.serving-detail { margin-top: 13px; color: #a9c2d9; font-size: 11px; }
+.upcoming-card { padding: 25px 22px; border: 1px solid #e8edf2; border-radius: 14px; background: #fff; }
+.upcoming-card h2, .section-title h2, .verify-intro h2 { margin: 6px 0 20px; color: #233d59; font: 700 17px 'Segoe UI', sans-serif; letter-spacing: -.4px; }
+.upcoming-list { display: flex; flex-direction: column; }
+.upcoming-item { min-height: 50px; display: grid; grid-template-columns: 43px 1fr auto; align-items: center; gap: 8px; border-top: 1px solid #f0f3f6; }
+.upcoming-item > span { color: #376e9f; font: 800 17px 'Segoe UI', sans-serif; }
+.upcoming-item b { color: #55687c; font-size: 10px; font-weight: 600; }
+.upcoming-item small { color: #a3aebb; font-size: 8px; font-weight: 700; letter-spacing: .8px; }
+.empty-upcoming { height: 195px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 10px; color: #a4b0bb; font-size: 11px; }
+.verify-card { margin-top: 18px; padding: 20px 24px; }
+.verify-intro { display: flex; align-items: center; gap: 12px; }
+.verify-icon { width: 38px; height: 38px; display: grid; place-items: center; color: #3672a9; border-radius: 10px; background: #f0f6fc; }
+.verify-intro h2 { margin: 0 0 4px; font-size: 14px; }
+.verify-intro p { margin: 0; color: #8795a3; font-size: 10px; }
+.verify-form { display: flex; gap: 10px; margin: 17px 0 8px 50px; }
+.verify-form input { flex: 1; }
+.prototype-note { display: block; margin-left: 50px; color: #a1adb8; font-size: 9px; }
+.verified-state { display: flex; align-items: center; gap: 7px; margin: 15px 0 0 50px; color: #268259; font-size: 12px; font-weight: 700; }
+.admin-heading { align-items: flex-end; }
+.admin-heading h1 { margin-bottom: 5px; }
+.admin-heading p { margin: 0; color: #8795a3; font-size: 12px; }
+.admin-user { display: flex; align-items: center; gap: 10px; }
+.avatar { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 50%; color: #356a9d; background: #e9f2fa; font-weight: 700; }
+.admin-user b, .admin-user small { display: block; }
+.admin-user b { color: #34495f; font-size: 11px; }
+.admin-user small { margin-top: 3px; color: #9aa6b2; font-size: 9px; }
+.icon-button { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid #e8edf2; border-radius: 8px; color: #778a9c; background: #fff; }
+.icon-button:hover { color: #265c8d; background: #f4f8fc; }
+.stats-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-bottom: 16px; }
+.stat-card { min-height: 85px; padding: 14px 12px; display: flex; align-items: center; gap: 10px; border: 1px solid #e8edf2; border-radius: 10px; background: #fff; }
+.stat-icon { flex: 0 0 34px; width: 34px; height: 34px; display: grid; place-items: center; border-radius: 9px; }
+.stat-icon svg { width: 17px; height: 17px; }
+.stat-icon.blue { color: #3877b1; background: #eef5fc; }
+.stat-icon.amber { color: #b28431; background: #fff7e8; }
+.stat-icon.purple { color: #8062ad; background: #f5f0fb; }
+.stat-icon.green { color: #338963; background: #edf8f2; }
+.stat-icon.teal { color: #268a8e; background: #eaf8f8; }
+.stat-icon.red { color: #bc6561; background: #fff0ef; }
+.stat-card small, .stat-card strong { display: block; }
+.stat-card small { margin-bottom: 6px; color: #8391a0; font-size: 9px; white-space: nowrap; }
+.stat-card strong { color: #243f5c; font: 800 19px 'Segoe UI', sans-serif; }
+.admin-grid { display: grid; grid-template-columns: 310px 1fr; gap: 16px; align-items: start; }
+.card { padding: 20px; }
+.section-title { display: flex; align-items: center; justify-content: space-between; }
+.section-title h2 { display: flex; align-items: center; gap: 8px; margin: 5px 0 0; }
+.status-tag { display: inline-flex; align-items: center; padding: 5px 7px; border-radius: 20px; font-size: 8px; font-weight: 800; letter-spacing: .5px; white-space: nowrap; }
+.status-tag.waiting { color: #a17728; background: #fff6e3; }
+.status-tag.called { color: #336fa5; background: #edf5fc; }
+.status-tag.verified { color: #338462; background: #eaf7f0; }
+.status-tag.completed { color: #267d79; background: #e8f7f6; }
+.status-tag.skipped { color: #aa5a55; background: #fff0ee; }
+.status-tag.idle { color: #8996a3; background: #f0f3f6; }
+.current-ticket { min-height: 120px; margin: 17px 0; padding: 15px; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid #ebf0f4; border-radius: 10px; background: #f9fbfd; }
+.current-ticket small { color: #8d9cad; font-size: 8px; font-weight: 700; letter-spacing: 1px; }
+.current-ticket strong { margin: 3px 0; color: #1e4c78; font: 800 38px 'Segoe UI', sans-serif; letter-spacing: -1px; }
+.current-ticket span { max-width: 100%; overflow: hidden; color: #7d8c9a; font-size: 9px; text-overflow: ellipsis; white-space: nowrap; }
+.control-actions { display: flex; flex-direction: column; gap: 8px; }
+.control-actions .primary-button { min-height: 40px; }
+.split-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.split-actions .secondary-button { padding: 0 7px; font-size: 10px; }
+.history-toggle { width: 100%; margin-top: 16px; padding: 12px 0 2px; display: flex; align-items: center; gap: 7px; border: 0; border-top: 1px solid #edf0f3; color: #59748f; background: transparent; text-align: left; font-size: 10px; }
+.history-toggle svg:last-child { margin-left: auto; transition: transform .15s; }
+.history-toggle svg.rotate { transform: rotate(180deg); }
+.history-list { max-height: 210px; overflow: auto; margin-top: 10px; }
+.history-list > p { color: #9aa6b1; font-size: 10px; }
+.history-item { padding: 8px 2px; display: grid; grid-template-columns: 1fr auto; gap: 4px; border-bottom: 1px solid #f1f3f5; font-size: 9px; }
+.history-item b { color: #46627c; }
+.history-item span { color: #8292a1; }
+.history-item code { grid-column: 1/-1; overflow: hidden; color: #99a6b0; text-overflow: ellipsis; }
+.count-badge { min-width: 23px; height: 20px; display: inline-grid; place-items: center; border-radius: 20px; color: #597b9a; background: #eef4f9; font: 600 10px 'Segoe UI'; }
+.table-tools { display: flex; gap: 9px; margin: 16px 0 10px; }
+.search-field { flex: 1; display: flex; align-items: center; gap: 7px; padding-left: 10px; border: 1px solid #e4e9ef; border-radius: 7px; color: #94a1ae; }
+.table-tools input { min-height: 36px; padding-left: 0; border: 0; }
+.table-tools input:focus { outline: none; }
+.table-tools select { width: 120px; min-height: 36px; padding: 0 7px; font-size: 10px; }
+.table-wrap { width: 100%; overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; text-align: left; }
+th { padding: 10px 8px; color: #93a0ac; font-size: 8px; font-weight: 700; letter-spacing: .7px; white-space: nowrap; }
+td { padding: 11px 8px; color: #687b8e; border-top: 1px solid #f0f3f6; font-size: 9px; white-space: nowrap; }
+td b { display: block; max-width: 110px; overflow: hidden; color: #41576c; font-size: 10px; text-overflow: ellipsis; }
+.phone-mask { display: block; margin-top: 3px; color: #a5b0ba; font-size: 8px; }
+.token-cell { color: #275d8c; font: 800 12px 'Manrope', sans-serif; }
+.source-tag { padding: 4px 6px; border-radius: 4px; font-size: 8px; font-weight: 700; }
+.source-tag.online { color: #3974a8; background: #edf5fc; }
+.source-tag.offline { color: #8d6b30; background: #fff6e7; }
+.empty-table { padding: 35px 8px; color: #98a5b0; text-align: center; }
+.auth-page { min-height: 65vh; display: grid; place-items: center; }
+.auth-card { width: min(430px, 100%); padding: 34px; }
+.auth-icon { width: 45px; height: 45px; margin-bottom: 20px; display: grid; place-items: center; color: #3474ad; border-radius: 12px; background: #eef5fb; }
+.auth-card h1 { margin: 9px 0; font-size: 29px; letter-spacing: -1px; }
+.auth-card > p { margin-bottom: 23px; color: #8391a0; font-size: 11px; line-height: 1.6; }
+.auth-card .booking-form { gap: 13px; }
+.text-button { margin-top: 16px; border: 0; color: #326d9f; background: transparent; font-size: 11px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+@media (max-width: 1000px) {
+  .booking-layout { grid-template-columns: 1fr 430px; gap: 35px; }
+  .stats-grid { grid-template-columns: repeat(3, 1fr); }
+  .admin-grid { grid-template-columns: 280px 1fr; }
+  .stat-card { min-height: 75px; }
+}
+@media (max-width: 760px) {
+  .topbar { height: auto; min-height: 67px; flex-wrap: wrap; padding: 10px 5vw 0; gap: 8px; }
+  .main-nav { height: 42px; order: 3; width: 100%; justify-content: space-between; }
+  .nav-item { padding: 0 7px; font-size: 10px; }
+  .connection { margin-left: auto; font-size: 9px; }
+  main { width: 90vw; padding: 33px 0 44px; }
+  .booking-layout { grid-template-columns: 1fr; gap: 28px; margin-top: 0; }
+  .booking-copy { padding: 4px 0 0; }
+  .booking-copy h1 { margin: 17px 0 12px; font-size: 40px; }
+  .lead { max-width: 540px; margin-bottom: 22px; font-size: 13px; }
+  .promise-row { flex-direction: row; flex-wrap: wrap; gap: 12px 25px; }
+  .queue-summary { margin-top: 22px; }
+  .form-card { padding: 23px 20px; }
+  .display-main { grid-template-columns: 1fr; }
+  .now-card { min-height: 285px; }
+  .upcoming-card { padding: 20px; }
+  .empty-upcoming { height: 100px; }
+  .admin-grid { grid-template-columns: 1fr; }
+  .admin-heading h1 { font-size: 30px; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  footer { padding: 12px 5vw; flex-direction: column; align-items: flex-start; gap: 7px; }
+}
+@media (max-width: 460px) {
+  .nav-item { gap: 4px; padding: 0 4px; font-size: 9px; }
+  .nav-item svg { width: 14px; }
+  .booking-copy h1 { font-size: 35px; }
+  .promise-row { flex-direction: column; }
+  .queue-summary { gap: 9px; padding: 12px; }
+  .form-card { padding: 20px 16px; }
+  .display-heading h1 { font-size: 28px; }
+  .verify-card { padding: 17px; }
+  .verify-form { margin-left: 0; flex-direction: column; }
+  .prototype-note, .verified-state { margin-left: 0; }
+  .admin-user > div { display: none; }
+  .stats-grid { gap: 8px; }
+  .stat-card { gap: 7px; padding: 10px 8px; }
+  .stat-icon { flex-basis: 30px; width: 30px; height: 30px; }
+  .stat-card small { font-size: 8px; }
+  .table-tools { flex-direction: column; }
+  .table-tools select { width: 100%; }
+}
