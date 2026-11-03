@@ -12,68 +12,43 @@ The application has three interfaces: a unified booking portal, a public queue d
 
 ## Local setup
 
-1. Install the project dependencies:
+### One-time setup
 
-   ```powershell
-   npm.cmd --prefix frontend install
-   npm.cmd --prefix backend install
-   npm.cmd --prefix blockchain install
-   ```
-
-2. Create the database and tables in MySQL:
+1. Install Node.js 20+ and MySQL 8+, and make sure the MySQL server is running.
+2. Create the database and tables by running `database\schema.sql` in MySQL Workbench. Alternatively, if the MySQL command-line client is installed:
 
    ```powershell
    $mysql = 'C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe'
    Get-Content database\schema.sql -Raw | & $mysql --user=root --password
    ```
 
-   If `mysql` is not on `PATH`, run the same SQL file in MySQL Workbench.
-
-3. Use a least-privilege MySQL account for the API. In MySQL Workbench or a root MySQL session, create a unique local password and grant only the needed database access:
-
-   ```sql
-   CREATE USER 'queuechain_app'@'127.0.0.1' IDENTIFIED BY 'replace_with_a_unique_local_password';
-   GRANT SELECT, INSERT, UPDATE ON queuechain.* TO 'queuechain_app'@'127.0.0.1';
-   ```
-
-4. Copy `.env.example` to `backend\.env`. Set `DB_USER=queuechain_app`, set `DB_PASSWORD` to the password from the prior step, and generate separate random values for `JWT_SECRET` and `ADMIN_SETUP_KEY`:
+3. If `backend\.env` does not exist, copy `.env.example` to create it. Otherwise, edit the existing file without overwriting it. Set your MySQL username/password, plus random values for `JWT_SECRET` and `ADMIN_SETUP_KEY`. Generate a random value with:
 
    ```powershell
    Copy-Item .env.example backend\.env
    node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"
    ```
 
-5. Start the local Hardhat chain in a dedicated terminal:
+4. Install blockchain dependencies and start the Hardhat node once to get its first local account private key:
 
    ```powershell
+   npm.cmd --prefix blockchain install
    npm.cmd --prefix blockchain run node
    ```
 
-   Hardhat prints local development accounts and their test-only private keys. Copy account 0's private key into `BLOCKCHAIN_PRIVATE_KEY` in `backend\.env`. Never use these keys outside the local test chain.
+   Copy account 0's private key into `BLOCKCHAIN_PRIVATE_KEY` in `backend\.env`. This is a test-only key; never use it outside the local Hardhat chain. Stop the node with Ctrl+C after setup.
 
-6. In a second terminal, compile, test, and deploy the contract:
-
-   ```powershell
-   npm.cmd --prefix blockchain run compile
-   npm.cmd --prefix blockchain test
-   npm.cmd --prefix blockchain run deploy:local
-   ```
-
-   Copy the deployed address printed by the deployment command into `QUEUECHAIN_CONTRACT_ADDRESS` in `backend\.env`. Restart the backend after changing environment variables.
-
-7. Start the API and real-time socket server:
+### Start the project
 
    ```powershell
-   npm.cmd --prefix backend start
+   powershell -ExecutionPolicy Bypass -File .\start-local.ps1
    ```
 
-8. Start the frontend in another terminal and open the displayed local URL:
+The launcher installs missing dependencies, starts the local blockchain if needed, deploys the contract when one is not already deployed, and opens the API and frontend in separate terminals. Open `http://localhost:5173`. The contract address is saved to `backend\.env` automatically. Keep all service terminals open while using the app.
 
-   ```powershell
-   npm.cmd --prefix frontend run dev
-   ```
+The first administrator is created from Admin → “First time? Set up administrator” using `ADMIN_SETUP_KEY`. Choose a unique password of at least 12 characters. There are no hard-coded production application credentials.
 
-The frontend is served at `http://localhost:5173`; the API is at `http://localhost:4000`. The first administrator is created from Admin → “First time? Set up administrator” using `ADMIN_SETUP_KEY`. Choose a unique password of at least 12 characters. There are no hard-coded production application credentials.
+Hardhat's local chain is in-memory. Keep its terminal running between app restarts. If you stop the chain, restarting it creates a fresh chain; previously stored database bookings will not exist on that new chain.
 
 ## Deploy the frontend to Vercel
 
