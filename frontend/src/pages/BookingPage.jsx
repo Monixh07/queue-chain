@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+
+const API_BASE_URL = (import.meta.env.VITE_API_URL || '').replace(/\/+$/, '');
 
 const BookingPage = () => {
   const [form, setForm] = useState({
@@ -17,13 +18,20 @@ const BookingPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:4000/api/bookings', {
-        ...form,
-        source: 'ONLINE'
+      const response = await fetch(`${API_BASE_URL}/api/bookings`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...form,
+          serviceRequired: form.service,
+          requestId: crypto.randomUUID(),
+        }),
       });
-      setMessage(`Booking successful! Token: ${res.data.dailyTokenNumber}`);
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || 'Booking failed.');
+      setMessage(`Booking successful! Token: ${result.dailyTokenNumber}`);
     } catch (err) {
-      setMessage('Booking failed');
+      setMessage(err.message || 'Booking failed.');
     }
   };
 

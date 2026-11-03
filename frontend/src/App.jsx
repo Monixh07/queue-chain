@@ -8,13 +8,15 @@ import {
 
 const emptyQueue = { current: null, upcoming: [], stats: {}, bookings: [] };
 const services = ['Aadhaar Services', 'Passport Services', 'Healthcare', 'Banking', 'Other'];
+const API_BASE_URL = (import.meta.env.VITE_API_URL || '').replace(/\/+$/, '');
+const apiUrl = (path) => `${API_BASE_URL}${path}`;
 const readStoredAdmin = () => {
   try { return JSON.parse(localStorage.getItem('queuechain_admin') || 'null'); }
   catch { return null; }
 };
 
 async function request(path, { token, ...options } = {}) {
-  const response = await fetch(path, {
+  const response = await fetch(apiUrl(path), {
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -61,7 +63,7 @@ function App() {
 
   useEffect(() => {
     refresh();
-    const socket = io({ path: '/socket.io', reconnection: true });
+    const socket = io(API_BASE_URL || undefined, { path: '/socket.io', reconnection: true });
     socket.on('connect', () => setConnected(true));
     socket.on('disconnect', () => setConnected(false));
     socket.on('queue:update', refresh);
@@ -336,7 +338,7 @@ function AdminPage(props) {
         {historyOpen && <div className="history-list">{history.length ? history.map((event, index) => <div className="history-item" key={`${event.transactionHash}-${index}`}><b>{event.eventType}</b><span>Token {formatToken(event.dailyTokenNumber)}</span><code>{event.transactionHash}</code></div>) : <p>No recorded transactions yet.</p>}</div>}
       </div>
       <div className="bookings-card card">
-        <div className="section-title"><div><span className="eyebrow">LIVE QUEUE</span><h2>Bookings <span className="count-badge">{queue.bookings.length}</span></h2></div><button className="icon-button" onClick={() => window.open('/api/queue/current', '_blank')} title="Open public queue data"><Eye size={18} /></button></div>
+        <div className="section-title"><div><span className="eyebrow">LIVE QUEUE</span><h2>Bookings <span className="count-badge">{queue.bookings.length}</span></h2></div><button className="icon-button" onClick={() => window.open(apiUrl('/api/queue/current'), '_blank')} title="Open public queue data"><Eye size={18} /></button></div>
         <div className="table-tools"><label className="search-field"><Search size={16} /><input placeholder="Search name, token, service…" value={filter} onChange={(e) => setFilter(e.target.value)} /></label>
           <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} aria-label="Filter by status"><option value="ALL">All statuses</option>{['WAITING', 'CALLED', 'VERIFIED', 'COMPLETED', 'SKIPPED'].map((status) => <option key={status}>{status}</option>)}</select></div>
         <div className="table-wrap"><table><thead><tr><th>TOKEN</th><th>VISITOR</th><th>SOURCE</th><th>SERVICE</th><th>TIME</th><th>STATUS</th></tr></thead>

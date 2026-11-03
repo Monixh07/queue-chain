@@ -75,6 +75,18 @@ The application has three interfaces: a unified booking portal, a public queue d
 
 The frontend is served at `http://localhost:5173`; the API is at `http://localhost:4000`. The first administrator is created from Admin → “First time? Set up administrator” using `ADMIN_SETUP_KEY`. Choose a unique password of at least 12 characters. There are no hard-coded production application credentials.
 
+## Deploy the frontend to Vercel
+
+The Vite frontend can be deployed to Vercel independently; the API, MySQL database, and blockchain node/contract must be hosted separately. Do not use a local Hardhat node or local MySQL instance for a public deployment.
+
+1. Import this repository into Vercel and set the project **Root Directory** to `frontend`.
+2. Vercel uses `frontend/vercel.json` to build the app into `dist` and serve the frontend for all paths.
+3. In the Vercel project settings, add `VITE_API_URL` for the Production environment with the public HTTPS origin of the deployed backend, for example `https://queuechain-api.example.com`. Do not include `/api` at the end. Redeploy after setting or changing it.
+4. Configure the backend's `FRONTEND_ORIGIN` to the exact Vercel frontend origin, such as `https://queuechain.vercel.app`, and set the backend's database, JWT, admin setup, and blockchain environment variables on its host. The backend must support persistent Socket.IO connections.
+5. Deploy the backend to a server/runtime that supports the project's Express and Socket.IO server, then check its `/api/health` endpoint before testing booking, admin, and live queue updates.
+
+`VITE_API_URL` is included in the public frontend bundle, so it must only contain the backend's public URL—never credentials or private keys. Without it, the frontend uses relative URLs, which is intended for local development through the Vite proxy and will not connect to a separately hosted production API.
+
 ## Demonstration
 
 1. Submit an online booking in Booking portal. It receives the next daily token and a confirmed transaction hash.
